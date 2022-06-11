@@ -1,0 +1,139 @@
+openapi: 3.0.2
+info:
+  title: ''
+  version: ''
+paths:
+  /emojis/:
+    get:
+      operationId: listEmojis
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Emoji'
+          description: ''
+      tags:
+      - emojis
+  /readonly-emojis/:
+    get:
+      operationId: listreadonly-emojis
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Emoji'
+          description: ''
+      tags:
+      - readonly-emojis
+  /emojis/decide_one/:
+    post:
+      operationId: decideOneEmoji
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DoubleEmoji'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DoubleEmoji'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DoubleEmoji'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DoubleEmoji'
+          description: ''
+      tags:
+      - emojis
+components:
+  schemas:
+    Emoji:
+      type: object
+      properties:
+        id:
+          type: integer
+        text:
+          type: string
+          readOnly: true
+        score:
+          type: string
+          format: decimal
+          multipleOf: 1.0e-10
+          maximum: 1000000000
+          minimum: -1000000000
+          readOnly: true
+      required:
+      - id
+    DoubleEmoji:
+      type: object
+      properties:
+        left:
+          type: object
+          properties:
+            id:
+              type: integer
+            text:
+              type: string
+              readOnly: true
+            score:
+              type: string
+              format: decimal
+              multipleOf: 1.0e-10
+              maximum: 1000000000
+              minimum: -1000000000
+              readOnly: true
+          required:
+          - id
+        right:
+          type: object
+          properties:
+            id:
+              type: integer
+            text:
+              type: string
+              readOnly: true
+            score:
+              type: string
+              format: decimal
+              multipleOf: 1.0e-10
+              maximum: 1000000000
+              minimum: -1000000000
+              readOnly: true
+          required:
+          - id
+        decided:
+          type: object
+          properties:
+            id:
+              type: integer
+            text:
+              type: string
+              readOnly: true
+            score:
+              type: string
+              format: decimal
+              multipleOf: 1.0e-10
+              maximum: 1000000000
+              minimum: -1000000000
+              readOnly: true
+          required:
+          - id
+      required:
+      - left
+      - right
+      - decided

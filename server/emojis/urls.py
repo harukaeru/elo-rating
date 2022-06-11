@@ -1,8 +1,16 @@
-from django.urls import path
+from django.urls import path, include
 
-from . import views
+from rest_framework import routers
+from .viewsets import ReadonlyEmojiViewSet, EmojiViewSet
+
+router = routers.DefaultRouter()
+router.register(r'emojis', EmojiViewSet)
+router.register(r'readonly-emojis', ReadonlyEmojiViewSet)
+
+from pprint import pprint
+print('emoji-router')
+pprint(router.urls)
 
 urlpatterns = [
-    path('get_emojis', views.get_emojis, name='get_mojis'),
-    path('decide_emoji', views.decide_emoji, name='decide_emoji'),
+    path('', include(router.urls)),
 ]

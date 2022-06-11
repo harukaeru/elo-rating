@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEmojis } from './hooks'
+import { EmojiComponent } from './Emoji'
 
-function App() {
+export function App() {
+
+  const { emojis, decideOneEmoji } = useEmojis()
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div>Battle</div>
+        <div>
+          <EmojiComponent emoji={emojis.left} onClick={() => {
+            decideOneEmoji(emojis.left, emojis.right, emojis.left)
+          }} />
+          <EmojiComponent emoji={emojis.right} onClick={() => {
+            decideOneEmoji(emojis.left, emojis.right, emojis.right)
+          }} />
+        </div>
       </header>
     </div>
   );
 }
-
-export default App;

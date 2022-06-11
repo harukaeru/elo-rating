@@ -1,2 +1,7 @@
 Django>=4.0
 psycopg2>=2.8
+pyyaml>=6.0
+uritemplate>=4.1.1
+djangorestframework>=3.13.1
+markdown>=3.3.7
+pygments>=2.12.0
